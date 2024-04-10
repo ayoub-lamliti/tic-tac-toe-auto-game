@@ -1,1 +1,460 @@
-let c=3;const B="<div class='square'></div>";let a=null,u=null,P=null,O=null,g=[],y=[],f=g,C=[],h=[],q=[],m=[],b=[],E=[];const o="x",l="o";let n={winner:{[o]:0,[l]:0},pointXO:{[o]:[],[l]:[]},pointPossibilitiesCpu:{[o]:[],[l]:[]},possibilityThreePointEmpty:{possibility:[]},possibilitiesThreePointNotEmpty:[],start:!0,player_now:u,gameOver:!1,playCpu:!1,playNotEasy:!1};const W=document.querySelector("#increment"),H=document.querySelector("#decrement"),p=document.querySelector("#quantity");W.addEventListener("click",()=>{parseInt(p.value)<15&&(p.value=parseInt(p.value)+2,c=parseInt(p.value))});H.addEventListener("click",()=>{parseInt(p.value)>3&&(p.value=parseInt(p.value)-2,c=parseInt(p.value))});document.getElementById("button").addEventListener("click",()=>{document.querySelector('input[name="player"]:checked').value===o?(u=o,k(o)):(u=l,k(l)),P=u===o?l:o,document.querySelector("#header-and-board-wrapper").classList.add("d-block"),document.querySelector(".container").classList.add("d-none"),G()});document.getElementById("checkAuto").addEventListener("change",e=>{n.playCpu=e.target.checked,n.playCpu?document.querySelector(".checkHardOrEasy").classList.add("d-block-force"):document.querySelector(".checkHardOrEasy").classList.remove("d-block-force")});document.getElementById("checkHardOrEasy").addEventListener("change",e=>{n.playNotEasy=e.target.checked});const G=()=>{let e="";const t=c*c;for(let r=0;r<t;r++)e+=B;document.querySelector(".grid-container").style=`grid-template-columns: ${c}fr repeat(${c-1}, auto);`,document.querySelector(".grid-container").innerHTML=e,c>3&&document.querySelectorAll(".square").forEach(r=>r.classList.add("square-countBig")),a=document.querySelectorAll(".square"),y=Array.from({length:t},(r,s)=>s),q=Array.from({length:c},(r,s)=>[]),m=c,y.forEach(r=>{let s=m-c;y.slice(s,m).length&&h.push(y.slice(s,m)),m+=c}),h.forEach(r=>{let s=0;r.forEach(d=>{q[s].push(d),s=s+1})});let i=0;h.forEach(r=>{b.push(r[i]),i=i+1}),i=c-1,h.forEach(r=>{E.push(r[i]),i=i-1}),O=b.filter(r=>E.includes(r))[0],g.push(...h,...q,b,E),f=g,C=[b[0],E[0],E.slice(-1)[0],b.slice(-1)[0]],a.forEach((r,s)=>{r.setAttribute("cell",s),r.addEventListener("click",d=>{r.getAttribute("player")||(v(s),n.playCpu&&!n.gameOver&&K(),T())})})},M=()=>{const e=u===o?l:o,t=n.start?u:e;return n.start=!n.start,t},X=(e=!1)=>{f.forEach(t=>{t.every(i=>x(i,o))&&(S(t,o),n.winner={...n.winner,[o]:n.winner.x+1}),t.every(i=>x(i,l))&&(S(t,l),n.winner={...n.winner,[l]:n.winner.o+1}),e&&S([],"we drew")})},S=(e,t)=>{e.length&&(u===t?t="winner":t="loser",R(e,t),t="You "+t),U(t),j(),n.gameOver=!0},T=()=>{document.getElementById("countWinnerX").textContent=n.winner.x,document.getElementById("countWinnerO").textContent=n.winner.o},U=e=>{alertify.confirm("Winner !!",e,t=>w(),t=>w())},R=(e,t)=>{e.forEach(i=>{a[i].classList.add(t)})},j=()=>{a.forEach(e=>{e.removeEventListener("click",t=>{})})},x=(e,t)=>a[e].getAttribute("player")===t,v=e=>{const t=M();n.player_now=t,$(t,e),t===o?(a[e].classList.add(o),k(l)):(a[e].classList.add(l),k(o)),a[e].setAttribute("player",t),a[e].innerText=t,a[e].classList.add("active"),X()},k=e=>{document.getElementById("turn").textContent=e.toUpperCase()},$=(e,t)=>{e===o?n.pointXO[o].push(t):n.pointXO[l].push(t),z(e),Y()},Y=()=>{const e=f.filter(t=>t.every(i=>n.pointXO[o].every(r=>r!==i)&&n.pointXO[l].every(r=>r!==i)));n.possibilityThreePointEmpty={...n.possibilityThreePointEmpty,possibility:e}},z=e=>{n.pointPossibilitiesCpu={...n.pointPossibilitiesCpu,[e]:D(n.pointXO[e])}},D=e=>{if(e.length>1){const t=c-1,i=1;let r={};return f.map((s,d)=>{r={...r,[d]:[]},s.some(L=>{e.includes(L)&&r[d].push(L)})}),Object.values(r).filter(s=>s.length>i&&s.length<=t)}return[e]},F=()=>({[o]:I(o,l),[l]:I(l,o)}),I=(e,t)=>f.filter(i=>n.pointPossibilitiesCpu[e].some(r=>r.every(s=>i.includes(s)))).filter(i=>n.pointXO[t].every(r=>!i.includes(r))),J=()=>{n.possibilitiesThreePointNotEmpty=f.filter(e=>n.possibilityThreePointEmpty.possibility.every(t=>!e.every(i=>t.includes(i))))},K=()=>{J(),V(),Q()},Q=()=>{const e=F(),t=A(e,u),i=A(e,P);n.pointXO[n.player_now].length>1&&n.player_now!==P&&(t.possibilitiesWinner?t.point[0].difference.length>1?i.possibilitiesWinner?v(i.point[0].difference[0]):_():v(t.point[0].difference[0]):i.possibilitiesWinner?v(i.point[0].difference[0]):_())},_=()=>{const e=ee();e!==void 0?v(e):X(!0)},A=(e,t)=>{let i={[t]:[]};return e[t].forEach(r=>{n.pointPossibilitiesCpu[t].some(s=>s.every(d=>r.includes(d))&&i[t].push({i:s,item:r,difference:r.filter(d=>!s.includes(d))}))}),{player:[t][0],possibilitiesWinner:i[t].length,point:i[t]}},V=()=>{if(n.pointXO[n.player_now].length===1){let e;n.pointXO[n.player_now][0]!==O?e=O:e=Z(),v(e)}},Z=()=>{let e=null;n.playNotEasy?e=C:e=y.filter(i=>n.pointXO[n.player_now][0]!==i);const t=Math.floor(Math.random()*e.length);return e[t]},ee=()=>{const e=y.filter(i=>n.pointXO[o].every(r=>r!==i)&&n.pointXO[l].every(r=>r!==i)),t=Math.floor(Math.random()*e.length);return e[t]},w=()=>{a.forEach(e=>{e.innerText="",e.removeAttribute("player"),e.classList.remove("winner","loser","active","x","o")}),k(u),n={...n,pointXO:{[o]:[],[l]:[]},pointPossibilitiesCpu:{[o]:[],[l]:[]},possibilityThreePointEmpty:{possibility:[]},possibilitiesThreePointNotEmpty:[],start:!0,player_now:u,gameOver:!1}},N=()=>{w(),n.winner={[o]:0,[l]:0},T()},te=()=>{N(),document.querySelector("#header-and-board-wrapper").classList.remove("d-block"),document.querySelector(".container").classList.remove("d-none"),P=null,u=null,document.querySelector("#checkAuto").checked&&document.querySelector("#checkAuto").click(),document.querySelector("#checkHardOrEasy").checked&&document.querySelector("#checkHardOrEasy").click(),p.value=3,c=3,a=null,u=null,P=null,O=null,g=[],y=[],f=g,C=[],h=[],q=[],m=[],b=[],E=[]};document.querySelector(".btn-resetAll").addEventListener("click",()=>N());document.querySelector(".btn-exitGame").addEventListener("click",()=>te());
+let row = 3;
+const factor = 2;
+const node = "<div class='square'></div>";
+let square = null;
+let player_start_choice = null;
+let playerCPU = null;
+let centerBoard = null;
+let board = [];
+let possibilitiesBoardArray = [];
+let possibilitiesBoard = board;
+let fourPoints = [];
+let rows = [];
+let columns = [];
+let countRow = [];
+let center = [];
+let centerReverse = [];
+
+const x = "x",
+    o = "o";
+
+let init = {
+    winner: { [x]: 0, [o]: 0 },
+    pointXO: { [x]: [], [o]: [] },
+    pointPossibilitiesCpu: { [x]: [], [o]: [] },
+    possibilityThreePointEmpty: { possibility: [] },
+    possibilitiesThreePointNotEmpty: [],
+    start: true,
+    player_now: player_start_choice,
+    gameOver: false,
+    playCpu: false,
+    playNotEasy: false,
+};
+
+const incrementButton = document.querySelector("#increment");
+const decrementButton = document.querySelector("#decrement");
+const quantityInput = document.querySelector("#quantity");
+
+incrementButton.addEventListener("click", () => {
+    if (parseInt(quantityInput.value) < 15) {
+        quantityInput.value = parseInt(quantityInput.value) + 2;
+        row = parseInt(quantityInput.value);
+    }
+});
+decrementButton.addEventListener("click", () => {
+    if (parseInt(quantityInput.value) > 3) {
+        quantityInput.value = parseInt(quantityInput.value) - 2;
+        row = parseInt(quantityInput.value);
+    }
+});
+
+document.getElementById("button").addEventListener("click", () => {
+    const player = document.querySelector('input[name="player"]:checked').value;
+    player === x
+        ? ((player_start_choice = x), turn(x))
+        : ((player_start_choice = o), turn(o));
+    playerCPU = player_start_choice === x ? o : x;
+    document.querySelector("#header-and-board-wrapper").classList.add("d-block");
+    document.querySelector(".container").classList.add("d-none");
+    render();
+});
+
+document.getElementById("checkAuto").addEventListener("change", (e) => {
+    init.playCpu = e.target.checked;
+    if (init.playCpu) {
+        document.querySelector(".checkHardOrEasy").classList.add("d-block-force");
+    } else
+        document
+            .querySelector(".checkHardOrEasy")
+            .classList.remove("d-block-force");
+});
+document.getElementById("checkHardOrEasy").addEventListener("change", (e) => {
+    init.playNotEasy = e.target.checked;
+});
+
+const render = () => {
+    let nodeSquares = '';
+    const countSquares = row * row;
+    for (let i = 0; i < countSquares; i++) {
+        nodeSquares += node;
+    }
+    document.querySelector(
+        ".grid-container"
+    ).style = `grid-template-columns: ${row}fr repeat(${row - 1}, auto);`;
+    document.querySelector(".grid-container").innerHTML = nodeSquares;
+
+    if (row > 3) {
+        document
+            .querySelectorAll(".square")
+            .forEach((item) => item.classList.add("square-countBig"));
+    }
+    square = document.querySelectorAll(".square");
+
+    possibilitiesBoardArray = Array.from(
+        { length: countSquares },
+        (_, index) => index
+    );
+
+    columns = Array.from({ length: row }, (_, index) => []);
+    countRow = row;
+
+    possibilitiesBoardArray.forEach((_) => {
+        let oldCount = countRow - row;
+        if (possibilitiesBoardArray.slice(oldCount, countRow).length) {
+            rows.push(possibilitiesBoardArray.slice(oldCount, countRow));
+        }
+        countRow += row;
+    });
+
+    rows.forEach((row) => {
+        let count = 0;
+        row.forEach((i) => {
+            columns[count].push(i);
+            count = count + 1;
+        });
+    });
+
+    let count = 0;
+    rows.forEach((row) => {
+        center.push(row[count]);
+        count = count + 1;
+    });
+
+    count = row - 1;
+    rows.forEach((row) => {
+        centerReverse.push(row[count]);
+        count = count - 1;
+    });
+
+    centerBoard = center.filter((item) => centerReverse.includes(item))[0];
+    board.push(...rows, ...columns, center, centerReverse);
+    possibilitiesBoard = board;
+    fourPoints = [
+        center[0],
+        centerReverse[0],
+        centerReverse.slice(-1)[0],
+        center.slice(-1)[0],
+    ];
+
+    square.forEach((element, index) => {
+        element.setAttribute("cell", index);
+        element.addEventListener("click", (e) => {
+            if (element.getAttribute("player")) return;
+            checkPlyer(index);
+            if (init.playCpu) {
+                !init.gameOver && playCPU();
+            }
+            showPointWinnerPlayers();
+        });
+    });
+};
+
+const changeStartGame = () => {
+    const playerNext = player_start_choice === x ? o : x;
+    const type = init.start ? player_start_choice : playerNext;
+    init.start = !init.start;
+    return type;
+};
+
+const checkGame = (drew = false) => {
+    possibilitiesBoard.forEach((row) => {
+        if (row.every((cell) => checkWinner(cell, x))) {
+            afterCheckWinner(row, x);
+            init.winner = { ...init.winner, [x]: init.winner.x + 1 };
+        }
+        if (row.every((cell) => checkWinner(cell, o))) {
+            afterCheckWinner(row, o);
+            init.winner = { ...init.winner, [o]: init.winner.o + 1 };
+        }
+        if (drew) {
+            afterCheckWinner([], "we drew");
+        }
+    });
+};
+
+const afterCheckWinner = (row, message) => {
+    if (row.length) {
+        player_start_choice === message
+            ? (message = "winner")
+            : (message = "loser");
+        changeColor(row, message);
+        message = "You " + message;
+    }
+    alertCustom(message);
+    removeEvent();
+    init.gameOver = true;
+};
+
+const showPointWinnerPlayers = () => {
+    document.getElementById("countWinnerX").textContent = init.winner.x;
+    document.getElementById("countWinnerO").textContent = init.winner.o;
+};
+
+const alertCustom = (message) => {
+    alertify.confirm(
+        "Winner !!",
+        message,
+        (_) => reset(),
+        (_) => reset()
+    );
+};
+
+const changeColor = (cell, color) => {
+    cell.forEach((element) => {
+        square[element].classList.add(color);
+    });
+};
+
+const removeEvent = () => {
+    square.forEach((item) => {
+        item.removeEventListener("click", (_) => { });
+    });
+};
+
+const checkWinner = (cell, player) => {
+    return square[cell].getAttribute("player") === player;
+};
+
+const checkPlyer = (value) => {
+    const player = changeStartGame();
+    init.player_now = player;
+    savePointXO(player, value);
+    player === x
+        ? (square[value].classList.add(x), turn(o))
+        : (square[value].classList.add(o), turn(x));
+    square[value].setAttribute("player", player);
+    square[value].innerText = player;
+    square[value].classList.add("active");
+    checkGame();
+};
+
+const turn = (player) => {
+    document.getElementById("turn").textContent = player.toUpperCase();
+};
+
+const savePointXO = (player, point) => {
+    player === x ? init.pointXO[x].push(point) : init.pointXO[o].push(point);
+    getPossibilitiesPointCpu(player);
+    possibilityThreePointEmptyAfterStartGame();
+};
+
+const possibilityThreePointEmptyAfterStartGame = () => {
+    const possibility = possibilitiesBoard.filter((possibility) =>
+        possibility.every(
+            (item) =>
+                init.pointXO[x].every((i) => i !== item) &&
+                init.pointXO[o].every((i) => i !== item)
+        )
+    );
+    init.possibilityThreePointEmpty = {
+        ...init.possibilityThreePointEmpty,
+        possibility: possibility,
+    };
+};
+
+const getPossibilitiesPointCpu = (player) => {
+    init.pointPossibilitiesCpu = {
+        ...init.pointPossibilitiesCpu,
+        [player]: getPossibilitiesCpu(init.pointXO[player]),
+    };
+};
+
+const getPossibilitiesCpu = (points) => {
+    if (points.length > 1) {
+        const max = row - 1,
+            min = 1;
+        let obj = {};
+        possibilitiesBoard.map((cell, i) => {
+            obj = { ...obj, [i]: [] };
+            cell.some((item) => {
+                points.includes(item) && obj[i].push(item);
+            });
+        });
+        return Object.values(obj).filter(
+            (item) => item.length > min && item.length <= max
+        );
+    }
+    return [points];
+};
+
+const getThreePointNotEmpty = () => {
+    return {
+        [x]: getResThreePointNotEmpty(x, o), // x
+        [o]: getResThreePointNotEmpty(o, x), // o
+    };
+};
+
+const getResThreePointNotEmpty = (player_1, player_2) => {
+    return possibilitiesBoard
+        .filter((possibility) =>
+            init.pointPossibilitiesCpu[player_1].some((item) =>
+                item.every((subItem) => possibility.includes(subItem))
+            )
+        )
+        .filter((item) =>
+            init.pointXO[player_2].every((subItem) => !item.includes(subItem))
+        );
+};
+
+const getPossibilitiesThreePointNotEmpty = () => {
+    init.possibilitiesThreePointNotEmpty = possibilitiesBoard.filter((item) =>
+        init.possibilityThreePointEmpty.possibility.every(
+            (i) => !item.every((subItem) => i.includes(subItem))
+        )
+    );
+};
+
+const playCPU = () => {
+    getPossibilitiesThreePointNotEmpty();
+    playerNextIfStartPlay();
+    helperPlayCPU();
+};
+
+const helperPlayCPU = () => {
+    const isPossibilityWinner = getThreePointNotEmpty();
+    const player_start = pointWinner(isPossibilityWinner, player_start_choice);
+    const player_next = pointWinner(isPossibilityWinner, playerCPU);
+
+    if (init.pointXO[init.player_now].length > 1) {
+        if (init.player_now !== playerCPU) {
+            if (player_start.possibilitiesWinner) {
+                if (player_start.point[0].difference.length > 1) {
+                    if (player_next.possibilitiesWinner) {
+                        checkPlyer(player_next.point[0].difference[0]);
+                    } else {
+                        getPointIfAllPossibilitiesPlayerNull();
+                    }
+                } else {
+                    checkPlyer(player_start.point[0].difference[0]);
+                }
+            } else if (player_next.possibilitiesWinner) {
+                checkPlyer(player_next.point[0].difference[0]);
+            } else {
+                getPointIfAllPossibilitiesPlayerNull();
+            }
+        }
+    }
+};
+
+const getPointIfAllPossibilitiesPlayerNull = () => {
+    const point = randomIndexEmptyPoint();
+    if (point !== undefined) {
+        checkPlyer(point);
+    } else {
+        checkGame(true);
+    }
+};
+
+const pointWinner = (PossibilityWinner, player) => {
+    let point = { [player]: [] };
+    PossibilityWinner[player].forEach((item) => {
+        init.pointPossibilitiesCpu[player].some(
+            (i) =>
+                i.every((subItem) => item.includes(subItem)) &&
+                point[player].push({
+                    i,
+                    item,
+                    difference: item.filter((item) => !i.includes(item)),
+                })
+        );
+    });
+    return {
+        player: [player][0],
+        possibilitiesWinner: point[player].length,
+        point: point[player],
+    };
+};
+
+const playerNextIfStartPlay = () => {
+    if (init.pointXO[init.player_now].length === 1) {
+        let randomNumber;
+        if (init.pointXO[init.player_now][0] !== centerBoard) {
+            randomNumber = centerBoard;
+        } else {
+            randomNumber = randomIndex();
+        }
+        checkPlyer(randomNumber);
+    }
+};
+
+const randomIndex = () => {
+    let numbers = null;
+    if (init.playNotEasy) {
+        numbers = fourPoints;
+    } else {
+        numbers = possibilitiesBoardArray.filter(
+            (item) => init.pointXO[init.player_now][0] !== item
+        );
+    }
+    const randomIndex = Math.floor(Math.random() * numbers.length);
+    return numbers[randomIndex];
+};
+
+const randomIndexEmptyPoint = () => {
+    const numbers = possibilitiesBoardArray.filter(
+        (item) =>
+            init.pointXO[x].every((i) => i !== item) &&
+            init.pointXO[o].every((i) => i !== item)
+    );
+    const randomIndex = Math.floor(Math.random() * numbers.length);
+    return numbers[randomIndex];
+};
+
+const reset = () => {
+    square.forEach((element) => {
+        element.innerText = "";
+        element.removeAttribute("player");
+        element.classList.remove("winner", "loser", "active", "x", "o");
+    });
+    turn(player_start_choice);
+    init = {
+        ...init,
+        pointXO: { [x]: [], [o]: [] },
+        pointPossibilitiesCpu: { [x]: [], [o]: [] },
+        possibilityThreePointEmpty: { possibility: [] },
+        possibilitiesThreePointNotEmpty: [],
+        start: true,
+        player_now: player_start_choice,
+        gameOver: false,
+    };
+};
+
+const resetAll = () => {
+    reset();
+    init.winner = { [x]: 0, [o]: 0 };
+    showPointWinnerPlayers();
+};
+
+const exitGame = () => {
+    resetAll();
+    document
+        .querySelector("#header-and-board-wrapper")
+        .classList.remove("d-block");
+    document.querySelector(".container").classList.remove("d-none");
+    playerCPU = null;
+    player_start_choice = null;
+    if (document.querySelector("#checkAuto").checked) {
+        document.querySelector("#checkAuto").click();
+    }
+    if (document.querySelector("#checkHardOrEasy").checked) {
+        document.querySelector("#checkHardOrEasy").click();
+    }
+    quantityInput.value = 3;
+    row = 3;
+    square = null;
+    player_start_choice = null;
+    playerCPU = null;
+    centerBoard = null;
+    board = [];
+    possibilitiesBoardArray = [];
+    possibilitiesBoard = board;
+    fourPoints = [];
+    rows = [];
+    columns = [];
+    countRow = [];
+    center = [];
+    centerReverse = [];
+};
+
+document.querySelector('.btn-resetAll').addEventListener('click', () => resetAll())
+document.querySelector('.btn-exitGame').addEventListener('click', () => exitGame())
