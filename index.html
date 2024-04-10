@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- EXTERNAL STYLING FILE -->
+    <link rel="stylesheet" href="./style.css">
+    <!--// EXTERNAL STYLING FILE //-->
+
+    <!-- ANIMATE CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <!--// ANIMATE CSS //-->
+
+    <!-- ALERTIFY JS -->
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+    <!-- Default theme -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
+    <!--// ALERTIFY JS //-->
+
+
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Shantell+Sans:ital,wght@1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
+        rel="stylesheet">
+    <!--// GOOGLE FONTS //-->
+    <script defer src="./javascript.js"></script>
+
+</head>
+
+<body class="">
+    <div id="all-content">
+
+        <!-- X/O BOARD -->
+        <div id="main-content">
+
+            <div id="header-and-board-wrapper">
+
+                <!-- TOP HEADER -->
+                <div class="parentHeader">
+                    <div id="header">
+                        <h2 id="instruction">
+                            <span id="turn">X</span> turn
+                        </h2>
+                    </div>
+                    <button type="button" class="action-btn btn" onclick="exitGame()" id="reset-btn">
+                        <img src="./exit.svg" width="30" height="30" alt="">
+                    </button>
+                </div>
+
+                <!--// TOP HEADER //-->
+
+                <!-- BOARD -->
+                <div class="grid-container">
+                </div>
+                <!-- BOARD -->
+
+                <!-- FOOTER -->
+                <div id="footer">
+                    <div class="d-flex">
+                        <span class="action-btn">
+                            player (X) : <span id="countWinnerX">0</span>
+                        </span>
+                        <span class="action-btn">
+                            player (O) : <span id="countWinnerO">0</span>
+                        </span>
+                    </div>
+                    <button type="button" class="action-btn btn" onclick="resetAll()" id="reset-btn">
+                        <img src="./reset.svg" width="30" alt="">
+                    </button>
+                </div>
+                <!-- FOOTER -->
+
+            </div>
+            <div class="container">
+                <h1>Choose</h1>
+                <input class="input-btn" type="radio" id="valueIs-1" name="player" checked value="x">
+                <label class="neon-btn" for="valueIs-1">
+                    <span class="span"></span>
+                    <span class="txt">player X</span>
+                </label>
+
+                <input class="input-btn" type="radio" id="valueIs-2" name="player" value="o">
+                <label class="neon-btn" for="valueIs-2">
+                    <span class="span"></span>
+                    <span class="txt">player O</span>
+                </label>
+                <div class="parentPlayCPU">
+                    <label class="playCPU">
+                        <input type="checkbox" name="checkAuto" id="checkAuto" value="true" />
+                        <div class="checkmark">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" class="icon No"
+                                fill="#149CEA">
+                                <path
+                                    d="M320 0c17.7 0 32 14.3 32 32V96H472c39.8 0 72 32.2 72 72V440c0 39.8-32.2 72-72 72H168c-39.8 0-72-32.2-72-72V168c0-39.8 32.2-72 72-72H288V32c0-17.7 14.3-32 32-32zM208 384c-8.8 0-16 7.2-16 16s7.2 16 16 16h32c8.8 0 16-7.2 16-16s-7.2-16-16-16H208zm96 0c-8.8 0-16 7.2-16 16s7.2 16 16 16h32c8.8 0 16-7.2 16-16s-7.2-16-16-16H304zm96 0c-8.8 0-16 7.2-16 16s7.2 16 16 16h32c8.8 0 16-7.2 16-16s-7.2-16-16-16H400zM264 256a40 40 0 1 0 -80 0 40 40 0 1 0 80 0zm152 40a40 40 0 1 0 0-80 40 40 0 1 0 0 80zM48 224H64V416H48c-26.5 0-48-21.5-48-48V272c0-26.5 21.5-48 48-48zm544 0c26.5 0 48 21.5 48 48v96c0 26.5-21.5 48-48 48H576V224h16z" />
+                            </svg>
+                            <p class="No name">Auto</p>
+                            <svg viewBox="0 0 16 16" class="icon Yes" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M11.5 6.027a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm-1.5 1.5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zm2.5-.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm-1.5 1.5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zm-6.5-3h1v1h1v1h-1v1h-1v-1h-1v-1h1v-1z">
+                                </path>
+                                <path
+                                    d="M3.051 3.26a.5.5 0 0 1 .354-.613l1.932-.518a.5.5 0 0 1 .62.39c.655-.079 1.35-.117 2.043-.117.72 0 1.443.041 2.12.126a.5.5 0 0 1 .622-.399l1.932.518a.5.5 0 0 1 .306.729c.14.09.266.19.373.297.408.408.78 1.05 1.095 1.772.32.733.599 1.591.805 2.466.206.875.34 1.78.364 2.606.024.816-.059 1.602-.328 2.21a1.42 1.42 0 0 1-1.445.83c-.636-.067-1.115-.394-1.513-.773-.245-.232-.496-.526-.739-.808-.126-.148-.25-.292-.368-.423-.728-.804-1.597-1.527-3.224-1.527-1.627 0-2.496.723-3.224 1.527-.119.131-.242.275-.368.423-.243.282-.494.575-.739.808-.398.38-.877.706-1.513.773a1.42 1.42 0 0 1-1.445-.83c-.27-.608-.352-1.395-.329-2.21.024-.826.16-1.73.365-2.606.206-.875.486-1.733.805-2.466.315-.722.687-1.364 1.094-1.772a2.34 2.34 0 0 1 .433-.335.504.504 0 0 1-.028-.079zm2.036.412c-.877.185-1.469.443-1.733.708-.276.276-.587.783-.885 1.465a13.748 13.748 0 0 0-.748 2.295 12.351 12.351 0 0 0-.339 2.406c-.022.755.062 1.368.243 1.776a.42.42 0 0 0 .426.24c.327-.034.61-.199.929-.502.212-.202.4-.423.615-.674.133-.156.276-.323.44-.504C4.861 9.969 5.978 9.027 8 9.027s3.139.942 3.965 1.855c.164.181.307.348.44.504.214.251.403.472.615.674.318.303.601.468.929.503a.42.42 0 0 0 .426-.241c.18-.408.265-1.02.243-1.776a12.354 12.354 0 0 0-.339-2.406 13.753 13.753 0 0 0-.748-2.295c-.298-.682-.61-1.19-.885-1.465-.264-.265-.856-.523-1.733-.708-.85-.179-1.877-.27-2.913-.27-1.036 0-2.063.091-2.913.27z">
+                                </path>
+                            </svg>
+                            <p class="Yes name">with Friend</p>
+                        </div>
+                    </label>
+                    <div class="d-none checkHardOrEasy">
+                        <label class="playCPU">
+                            <input type="checkbox" name="checkAuto" id="checkHardOrEasy" value="true" />
+                            <div class="checkmark">
+                                <p class="No name">HARD</p>
+                                <p class="Yes name">EASY</p>
+                            </div>
+                        </label>
+                    </div>
+                    <button type="button" id="button">
+                        Play Now
+                    </button>
+                </div>
+                <div class="parent-wrapper">
+                    <h5>Number of Row</h5>
+                    <span class="input-wrapper">
+                        <button type="button" id="decrement">-</button>
+                        <input type="number" min="3" max="15" readonly value="3" id="quantity" />
+                        <button type="button" id="increment">+</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <!--// X/O BOARD //-->
+    </div>
+</body>
+
+</html>
