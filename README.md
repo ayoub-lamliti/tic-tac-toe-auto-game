@@ -1,9 +1,9 @@
 # Tic Tac Toe
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/ayoub-lamliti/tic-tac-toe-auto-game/images/img1.jpeg" width="200" alt="Tic Tac Toe Logo">
-  <img src="https://raw.githubusercontent.com/ayoub-lamliti/tic-tac-toe-auto-game/images/img2.jpeg" width="200" alt="Tic Tac Toe Logo">
-  <img src="https://raw.githubusercontent.com/ayoub-lamliti/tic-tac-toe-auto-game/images/img3.jpeg" width="200" alt="Tic Tac Toe Logo">
+  <img src="https://raw.githubusercontent.com/ayoub-lamliti/tic-tac-toe-auto-game/main/images/img1.jpeg" width="200" alt="Tic Tac Toe Logo">
+  <img src="https://raw.githubusercontent.com/ayoub-lamliti/tic-tac-toe-auto-game/main/images/img2.jpeg" width="200" alt="Tic Tac Toe Logo">
+  <img src="https://raw.githubusercontent.com/ayoub-lamliti/tic-tac-toe-auto-game/main/images/img3.jpeg" width="200" alt="Tic Tac Toe Logo">
 </p>
 
 <p align="center">
