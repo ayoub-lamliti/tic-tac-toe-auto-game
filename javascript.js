@@ -130,12 +130,13 @@ const render = () => {
     board.push(...rows, ...columns, center, centerReverse);
     possibilitiesBoard = board;
     fourPoints = [
-        center[0],
-        centerReverse[0],
-        centerReverse.slice(-1)[0],
-        center.slice(-1)[0],
+        center.shift(),
+        centerReverse.shift(),
+        centerReverse.pop(),
+        center.pop(),
     ];
 
+    console.log(fourPoints);
     square.forEach((element, index) => {
         element.setAttribute("cell", index);
         element.addEventListener("click", (e) => {
