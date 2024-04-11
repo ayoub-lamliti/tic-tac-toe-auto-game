@@ -136,7 +136,6 @@ const render = () => {
         center.pop(),
     ];
 
-    console.log(fourPoints);
     square.forEach((element, index) => {
         element.setAttribute("cell", index);
         element.addEventListener("click", (e) => {
