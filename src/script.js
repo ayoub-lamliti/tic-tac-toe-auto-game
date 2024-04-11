@@ -127,7 +127,7 @@ const render = () => {
     });
 
     const intersections = [center, centerReverse]
-    board.push(...[...rows, ...columns, ...intersections]);
+    board.push(...rows, ...columns, ...intersections);
     possibilitiesBoard = board;
 
     centerBoard = center.filter((item) => centerReverse.includes(item))[0];
