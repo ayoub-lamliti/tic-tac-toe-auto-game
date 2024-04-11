@@ -8,6 +8,7 @@ let centerBoard = null;
 let board = [];
 let possibilitiesBoardArray = [];
 let possibilitiesBoard = board;
+/* fourPoints : box edges */
 let fourPoints = [];
 let rows = [];
 let columns = [];
@@ -113,7 +114,6 @@ const render = () => {
             count = count + 1;
         });
     });
-
     let count = 0;
     rows.forEach((row) => {
         center.push(row[count]);
@@ -126,14 +126,17 @@ const render = () => {
         count = count - 1;
     });
 
-    centerBoard = center.filter((item) => centerReverse.includes(item))[0];
-    board.push(...rows, ...columns, center, centerReverse);
+    const intersections = [center, centerReverse]
+    board.push(...[...rows, ...columns, ...intersections]);
     possibilitiesBoard = board;
+
+    centerBoard = center.filter((item) => centerReverse.includes(item))[0];
+
     fourPoints = [
-        center.shift(),
-        centerReverse.shift(),
-        centerReverse.pop(),
-        center.pop(),
+        [...center].shift(),
+        [...centerReverse].shift(),
+        [...centerReverse].pop(),
+        [...center].pop(),
     ];
 
     square.forEach((element, index) => {
