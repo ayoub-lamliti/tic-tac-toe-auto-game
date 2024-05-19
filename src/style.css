@@ -6,6 +6,10 @@
     --color-mustard-midtone: #9c7830;
 }
 
+* {
+    outline: none !important;
+}
+
 /* ======= ELEMENTS STYLES ======= */
 body {
     margin: 0px;
@@ -601,6 +605,7 @@ input[type="number"] {
     color: white;
 }
 
+
 @media (max-width: 800px) {
     .container {
         max-width: calc(100% - 50px);
@@ -616,9 +621,6 @@ input[type="number"] {
         display: flex;
         gap: 1rem;
     }
-}
-
-@media (max-width: 800px) {
 
     .groupPlayCPU {
         display: flex;
@@ -678,5 +680,9 @@ input[type="number"] {
         font-size: 12px;
         display: flex;
         align-items: center;
+    }
+
+    .input-wrapper button {
+        font-size: 26px;
     }
 }
