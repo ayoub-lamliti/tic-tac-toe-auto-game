@@ -617,3 +617,11 @@ input[type="number"] {
         gap: 1rem;
     }
 }
+@media (min-width: 800px) {
+   
+    .groupPlayCPU {
+        display: flex;
+        gap: 0.4rem;
+        flex-direction: row;
+    }
+}
