@@ -48,7 +48,6 @@ button {
     color: white;
     border-radius: 30px;
     box-shadow: 0px 5px 13px rgba(0, 0, 0, 0.2);
-    margin-bottom: 10px;
     padding: 10px 50px;
     text-align: center;
 }
@@ -357,7 +356,8 @@ button {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    align-items: center;
+    margin-bottom: 10px;
+    align-items: stretch;
 }
 
 .parentHeader #reset-btn {
@@ -617,11 +617,66 @@ input[type="number"] {
         gap: 1rem;
     }
 }
-@media (min-width: 800px) {
-   
+
+@media (max-width: 800px) {
+
     .groupPlayCPU {
         display: flex;
         gap: 0.4rem;
         flex-direction: row;
+    }
+
+    #button {
+        height: 2.5em !important;
+        font-size: 14px;
+        width: 15em;
+    }
+
+    .container h1 {
+        font-size: 56px;
+    }
+
+    .neon-btn {
+        height: 34px !important;
+    }
+
+    .neon-btn .txt {
+        font-size: 0.8em;
+    }
+
+    .playCPU {
+        font-size: 14px;
+    }
+
+    .parent-wrapper h5 {
+        font-size: 12px;
+    }
+
+    #quantity {
+        font-style: 20px;
+    }
+
+    .square {
+        width: 50px;
+        height: 50px;
+    }
+
+    .action-btn {
+        font-size: 12px;
+    }
+
+    #reset-btn img {
+        width: 22px;
+    }
+
+    .instruction {
+        font-size: 16px;
+    }
+
+    #header {
+        padding: 5px 40px;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
     }
 }
