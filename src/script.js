@@ -433,14 +433,9 @@ const playPlayerNextIfStartPlayOneTime = () => {
 
 // Generating a random point for play
 const randomPointPlacePlay = () => {
-    let numbers = null;
-    if (init.playNotEasy) {
-        numbers = fourPoints;
-    } else {
-        numbers = possibilitiesBoardArray.filter(
-            (item) => init.pointXO[init.player_now][0] !== item
-        );
-    }
+    const numbers = init.playNotEasy ? fourPoints : possibilitiesBoardArray.filter(
+        (item) => init.pointXO[init.player_now][0] !== item
+    );
     const randomIndex = Math.floor(Math.random() * numbers.length);
     return numbers[randomIndex];
 };
@@ -453,8 +448,7 @@ const reset = () => {
         element.innerText = "";
     });
     turn(player_start_choice);
-    init = {
-        ...init,
+    Object.assign(init, {
         pointXO: { [x]: [], [o]: [] },
         pointPossibilitiesCpu: { [x]: [], [o]: [] },
         possibilityThreePointEmpty: { possibility: [] },
@@ -462,7 +456,8 @@ const reset = () => {
         start: true,
         player_now: player_start_choice,
         gameOver: false,
-    };
+        playNotEasy: false,
+    });
 };
 
 // Resetting everything
@@ -481,12 +476,10 @@ const exitGame = () => {
     document.querySelector(".container").classList.remove("d-none");
     playerCPU = null;
     player_start_choice = null;
-    if (document.querySelector("#checkAuto").checked) {
-        document.querySelector("#checkAuto").click();
-    }
-    if (document.querySelector("#checkHardOrEasy").checked) {
-        document.querySelector("#checkHardOrEasy").click();
-    }
+    const checkAuto = document.querySelector("#checkAuto");
+    const checkHardOrEasy = document.querySelector("#checkHardOrEasy");
+    if (checkAuto.checked) checkAuto.click()
+    if (checkHardOrEasy.checked) checkHardOrEasy.click()
     quantityInput.value = 3;
     row = 3;
     square = null;

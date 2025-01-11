@@ -605,6 +605,10 @@ input[type="number"] {
     color: white;
 }
 
+.groupPlayCPU {
+    display: flex;
+    gap: .4rem;
+}
 
 @media (max-width: 800px) {
     .container {
@@ -614,11 +618,6 @@ input[type="number"] {
     .parentPlayCPU {
         display: flex;
         flex-direction: column;
-        gap: 1rem;
-    }
-
-    .groupPlayCPU {
-        display: flex;
         gap: 1rem;
     }
 
