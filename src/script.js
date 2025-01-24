@@ -456,7 +456,6 @@ const reset = () => {
         start: true,
         player_now: player_start_choice,
         gameOver: false,
-        playNotEasy: false,
     });
 };
 
