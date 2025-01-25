@@ -393,9 +393,6 @@ const playRandomIfAllPossibilitiesEqualNull = () => {
     );
     const randomIndex = Math.floor(Math.random() * numbers.length);
     const point = numbers[randomIndex];
-
-    console.log(point);
-
     point !== undefined ? place_play(point) : check_winner(true);
 };
 
@@ -425,11 +422,6 @@ const playPlayerNextIfStartPlayOneTime = () => {
     if (init.pointXO[init.player_now].length === 1) {
         let randomNumber;
         if (init.pointXO[init.player_now][0] !== centerBoard) {
-
-            console.log(centerBoard);
-            console.log(init.pointXO[init.player_now][0]);
-
-
             randomNumber = centerBoard;
         } else {
             randomNumber = randomPointPlacePlay();
@@ -443,10 +435,6 @@ const randomPointPlacePlay = () => {
     const numbers = init.playNotEasy ? fourPoints : possibilitiesBoardArray.filter(
         (item) => init.pointXO[init.player_now][0] !== item
     );
-    console.log(numbers);
-    console.log(possibilitiesBoardArray);
-
-
     const randomIndex = Math.floor(Math.random() * numbers.length);
     return numbers[randomIndex];
 };
