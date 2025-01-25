@@ -362,26 +362,33 @@ const helperPlayCPU = () => {
         isPossibilityWinner,
         playerCPU
     );
+    if (init.pointXO[init.player_now].length <= 1 && init.player_now === playerCPU) {
+        return;
+    }
 
-    if (init.pointXO[init.player_now].length > 1) {
-        if (init.player_now !== playerCPU) {
-            if (player_start.possibilitiesWinner) {
-                if (player_start.point[0].difference.length > 1) {
-                    if (player_next.possibilitiesWinner) {
-                        place_play(player_next.point[0].difference[0]);
-                    } else {
-                        playRandomIfAllPossibilitiesEqualNull();
-                    }
-                } else {
-                    place_play(player_start.point[0].difference.pop());
-                }
-            } else if (player_next.possibilitiesWinner) {
-                place_play(player_next.point[0].difference.pop());
+    const playNextDifference = () => place_play(player_next.point[0].difference.pop());
+    const playStartDifference = () => place_play(player_start.point[0].difference.pop());
+
+    if (player_start.possibilitiesWinner) {
+        if (player_start.point[0].difference.length > 1) {
+            if (player_next.possibilitiesWinner) {
+                place_play(player_next.point[0].difference[0]);
             } else {
                 playRandomIfAllPossibilitiesEqualNull();
             }
+        } else {
+            if (player_next.possibilitiesWinner) {
+                playNextDifference();
+            } else {
+                playStartDifference();
+            }
         }
+    } else if (player_next.possibilitiesWinner) {
+        playNextDifference();
+    } else {
+        playRandomIfAllPossibilitiesEqualNull();
     }
+
 };
 
 // Playing random if all possibilities are null
