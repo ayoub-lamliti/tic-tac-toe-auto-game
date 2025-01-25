@@ -373,10 +373,10 @@ const helperPlayCPU = () => {
                         playRandomIfAllPossibilitiesEqualNull();
                     }
                 } else {
-                    place_play(player_start.point[0].difference[0]);
+                    place_play(player_start.point[0].difference.pop());
                 }
             } else if (player_next.possibilitiesWinner) {
-                place_play(player_next.point[0].difference[0]);
+                place_play(player_next.point[0].difference.pop());
             } else {
                 playRandomIfAllPossibilitiesEqualNull();
             }
@@ -394,6 +394,8 @@ const playRandomIfAllPossibilitiesEqualNull = () => {
     const randomIndex = Math.floor(Math.random() * numbers.length);
     const point = numbers[randomIndex];
 
+    console.log(point);
+
     point !== undefined ? place_play(point) : check_winner(true);
 };
 
@@ -405,8 +407,8 @@ const locationPointPossibilityWinning = (PossibilityWinner, player) => {
             (i) =>
                 i.every((subItem) => item.includes(subItem)) &&
                 point[player].push({
-                    i,
-                    item,
+                    filled: i,
+                    pointToBeWinner: item,
                     difference: item.filter((item) => !i.includes(item)),
                 })
         );
@@ -423,6 +425,11 @@ const playPlayerNextIfStartPlayOneTime = () => {
     if (init.pointXO[init.player_now].length === 1) {
         let randomNumber;
         if (init.pointXO[init.player_now][0] !== centerBoard) {
+
+            console.log(centerBoard);
+            console.log(init.pointXO[init.player_now][0]);
+
+
             randomNumber = centerBoard;
         } else {
             randomNumber = randomPointPlacePlay();
@@ -436,6 +443,10 @@ const randomPointPlacePlay = () => {
     const numbers = init.playNotEasy ? fourPoints : possibilitiesBoardArray.filter(
         (item) => init.pointXO[init.player_now][0] !== item
     );
+    console.log(numbers);
+    console.log(possibilitiesBoardArray);
+
+
     const randomIndex = Math.floor(Math.random() * numbers.length);
     return numbers[randomIndex];
 };
