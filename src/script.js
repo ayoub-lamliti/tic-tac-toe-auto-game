@@ -377,7 +377,7 @@ const helperPlayCPU = () => {
                 playRandomIfAllPossibilitiesEqualNull();
             }
         } else {
-            if (player_next.possibilitiesWinner) {
+            if (player_next.possibilitiesWinner && player_next.point[0].difference.length === 1) {
                 playNextDifference();
             } else {
                 playStartDifference();
