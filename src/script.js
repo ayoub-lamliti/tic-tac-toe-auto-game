@@ -17,7 +17,7 @@ let square = null, // Stores all the squares of the grid
     fourPoints = [], // Box edges
     rows = [], // Rows on the board
     columns = [], // Columns on the board
-    countRow = [], // Counter for rows
+    countRow = 0, // Counter for rows
     squareIntersectionFirst = [], // The first intersection of the square
     squareIntersectionSecond = []; // Second intersection of the square
 
@@ -93,6 +93,7 @@ const render = () => {
 
     // Calculate total squares
     const countSquares = row * row;
+
     for (let i = 0; i < countSquares; i++) {
         nodeSquares += node;
     }
@@ -121,13 +122,13 @@ const render = () => {
     countRow = row;
 
     // Divide the board into rows
-    possibilitiesBoardArray.forEach((_) => {
+    for (let i = 0; i < row; i++) {
         let oldCount = countRow - row;
         if (possibilitiesBoardArray.slice(oldCount, countRow).length) {
             rows.push(possibilitiesBoardArray.slice(oldCount, countRow));
+            countRow += row;
         }
-        countRow += row;
-    });
+    }
 
     // Divide the board into columns
     rows.forEach((row) => {
