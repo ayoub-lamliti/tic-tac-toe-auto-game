@@ -118,9 +118,7 @@ const render = () => {
         (_, index) => index
     );
 
-    columns = Array.from({ length: row }, (_, index) => []);
     countRow = row;
-
     // Divide the board into rows
     for (let i = 0; i < row; i++) {
         let oldCount = countRow - row;
@@ -130,15 +128,11 @@ const render = () => {
             countRow += row;
         }
     }
-   
+
     // Divide the board into columns
-    rows.forEach((row) => {
-        let count = 0;
-        row.forEach((i) => {
-            columns[count].push(i);
-            count = count + 1;
-        });
-    });
+    for (let i = 0; i < row; i++) {
+        columns.push(rows.map(row => row[i]));
+    }
 
     // Define the first intersection of squares
     let count = 0;
