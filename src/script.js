@@ -124,12 +124,13 @@ const render = () => {
     // Divide the board into rows
     for (let i = 0; i < row; i++) {
         let oldCount = countRow - row;
-        if (possibilitiesBoardArray.slice(oldCount, countRow).length) {
-            rows.push(possibilitiesBoardArray.slice(oldCount, countRow));
+        let slice = possibilitiesBoardArray.slice(oldCount, countRow)
+        if (slice.length) {
+            rows.push(slice);
             countRow += row;
         }
     }
-
+   
     // Divide the board into columns
     rows.forEach((row) => {
         let count = 0;
