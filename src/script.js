@@ -1,4 +1,4 @@
-let row = 3; // Number of rows and columns on the board
+let BOARD_SIZE = 3; // Number of rows and columns on the board
 
 // Constants
 const factor = 2,
@@ -44,13 +44,13 @@ const incrementButton = document.querySelector("#increment"),
 incrementButton.addEventListener("click", () => {
     if (parseInt(quantityInput.value) < 15) {
         quantityInput.value = parseInt(quantityInput.value) + 2;
-        row = parseInt(quantityInput.value);
+        BOARD_SIZE = parseInt(quantityInput.value);
     }
 });
 decrementButton.addEventListener("click", () => {
     if (parseInt(quantityInput.value) > 3) {
         quantityInput.value = parseInt(quantityInput.value) - 2;
-        row = parseInt(quantityInput.value);
+        BOARD_SIZE = parseInt(quantityInput.value);
     }
 });
 
@@ -92,7 +92,7 @@ const render = () => {
     let nodeSquares = "";
 
     // Calculate total squares
-    const countSquares = row * row;
+    const countSquares = BOARD_SIZE * BOARD_SIZE;
 
     for (let i = 0; i < countSquares; i++) {
         nodeSquares += node;
@@ -101,11 +101,11 @@ const render = () => {
     // Set up grid template
     document.querySelector(
         ".grid-container"
-    ).style = `grid-template : repeat(${row}, 1fr) / repeat(${row}, 1fr);`;
+    ).style = `grid-template : repeat(${BOARD_SIZE}, 1fr) / repeat(${BOARD_SIZE}, 1fr);`;
     document.querySelector(".grid-container").innerHTML = nodeSquares;
 
     // If the row is greater than 3, apply a class
-    if (row > 3) {
+    if (BOARD_SIZE > 3) {
         document
             .querySelectorAll(".square")
             .forEach((item) => item.classList.add("square-countBig"));
@@ -118,19 +118,19 @@ const render = () => {
         (_, index) => index
     );
 
-    countRow = row;
+    countRow = BOARD_SIZE;
     // Divide the board into rows
-    for (let i = 0; i < row; i++) {
-        let oldCount = countRow - row;
+    for (let i = 0; i < BOARD_SIZE; i++) {
+        let oldCount = countRow - BOARD_SIZE;
         let slice = possibilitiesBoardArray.slice(oldCount, countRow)
         if (slice.length) {
             rows.push(slice);
-            countRow += row;
+            countRow += BOARD_SIZE;
         }
     }
 
     // Divide the board into columns
-    for (let i = 0; i < row; i++) {
+    for (let i = 0; i < BOARD_SIZE; i++) {
         columns.push(rows.map(row => row[i]));
     }
 
@@ -142,7 +142,7 @@ const render = () => {
     });
 
     // Define the second intersection of squares
-    count = row - 1;
+    count = BOARD_SIZE - 1;
     rows.forEach((row) => {
         squareIntersectionSecond.push(row[count]);
         count = count - 1;
@@ -160,10 +160,10 @@ const render = () => {
 
     // Define the edges of the board
     fourPoints = [
-        [...squareIntersectionFirst].shift(),
-        [...squareIntersectionSecond].shift(),
-        [...squareIntersectionSecond].pop(),
-        [...squareIntersectionFirst].pop(),
+        squareIntersectionFirst[0],
+        squareIntersectionSecond[0],
+        squareIntersectionSecond[BOARD_SIZE - 1],
+        squareIntersectionFirst[BOARD_SIZE - 1]
     ];
 
     // Add click event listener to each square
@@ -291,7 +291,7 @@ const possibilityThreePointEmpty = () => {
 const getPossibilitiesPointPlayCpu = (player) => {
     const helper = (points) => {
         if (points.length > 1) {
-            const max = row - 1,
+            const max = BOARD_SIZE - 1,
                 min = 1;
             let obj = {};
             possibilitiesBoard.map((cell, i) => {
@@ -482,7 +482,7 @@ const exitGame = () => {
     if (checkAuto.checked) checkAuto.click()
     if (checkHardOrEasy.checked) checkHardOrEasy.click()
     quantityInput.value = 3;
-    row = 3;
+    BOARD_SIZE = 3;
     square = null;
     player_start_choice = null;
     playerCPU = null;
