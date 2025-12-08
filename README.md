@@ -43,7 +43,7 @@ Tic Tac Toe is a classic game where two players take turns marking spaces in a 3
 - Take turns clicking on the cells to make your moves.
 
 ## Demo
-<button>btn<button/>
+
 You can try out the game online [here](https://ayoub-lamliti.github.io/tic-tac-toe-auto-game).
 
 Have fun playing Tic Tac Toe! If you encounter any issues or have suggestions for improvements, feel free to open an issue or create a pull request. Enjoy!
