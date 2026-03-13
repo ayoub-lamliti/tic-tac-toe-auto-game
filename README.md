@@ -1,50 +1,88 @@
 # Tic Tac Toe
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/ayoub-lamliti/tic-tac-toe-auto-game/main/images/img1.png" width="400" alt="Tic Tac Toe Logo">
-  <img src="https://raw.githubusercontent.com/ayoub-lamliti/tic-tac-toe-auto-game/main/images/img2.png" width="400" alt="Tic Tac Toe Logo">
-  <img src="https://raw.githubusercontent.com/ayoub-lamliti/tic-tac-toe-auto-game/main/images/img3.png" width="400" alt="Tic Tac Toe Logo">
-  <img src="https://raw.githubusercontent.com/ayoub-lamliti/tic-tac-toe-auto-game/main/images/img4.png" width="400" alt="Tic Tac Toe Logo">
+[![Live Demo](https://img.shields.io/badge/▶%20Live%20Demo-Play%20now-brightgreen?style=for-the-badge)](https://ayoub-lamliti.github.io/tic-tac-toe-auto-game)
+[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+[![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
+[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
+
+A browser-based Tic Tac Toe game with an AI opponent powered by the **Minimax algorithm** — the hard mode CPU plays a perfect, unbeatable game.
+
+---
+
+## 📸 Screenshots
+
+<p>
+  <img src="https://raw.githubusercontent.com/ayoub-lamliti/tic-tac-toe-auto-game/main/images/img1.png" width="400" alt="Game screen 1" />
+  <img src="https://raw.githubusercontent.com/ayoub-lamliti/tic-tac-toe-auto-game/main/images/img2.png" width="400" alt="Game screen 2" />
+</p>
+<p>
+  <img src="https://raw.githubusercontent.com/ayoub-lamliti/tic-tac-toe-auto-game/main/images/img3.png" width="400" alt="Game screen 3" />
+  <img src="https://raw.githubusercontent.com/ayoub-lamliti/tic-tac-toe-auto-game/main/images/img4.png" width="400" alt="Game screen 4" />
 </p>
 
-<p align="center">
-  <a href="https://ayoub-lamliti.github.io/tic-tac-toe-auto-game" target="_blank">Play Tic Tac Toe Online</a>
-</p>
+---
 
-## About
+## ✨ Features
 
-Tic Tac Toe is a classic game where two players take turns marking spaces in a 3x3 grid, trying to get three of their marks in a row, column, or diagonal. This project allows you to play Tic Tac Toe either against the CPU or against a friend.
+- **vs CPU** — easy (random moves) or hard (Minimax, unbeatable)
+- **vs Friend** — local two-player mode
+- **Responsive design** — works on desktop and mobile
+- **Zero dependencies** — pure HTML / CSS / JS, no install needed
 
-## Features
+---
 
-- Choose to play against the CPU or against a friend.
-- Select the difficulty level when playing against the CPU (easy or hard).
-- Responsive design for optimal gameplay on various devices.
-- Clear interface with visual feedback for moves.
+## 🧠 How the AI works
 
-## How to Play
+The hard mode CPU uses **Minimax** — a classic game-tree algorithm that simulates every possible move sequence to pick the optimal play. It cannot be beaten, only drawn.
 
-1. Choose whether you want to play against the CPU or against a friend.
-2. If you choose to play against the CPU, select the difficulty level.
-3. Click on the cells to make your moves.
-4. Try to get three of your marks in a row before your opponent does!
+```
+For every empty cell:
+→ Simulate placing the CPU's mark
+→ Recursively evaluate all opponent responses
+→ Score the outcome (win / draw / loss)
+→ Pick the move with the highest score
+```
 
-## Options
+---
 
-### Play Against CPU
+## 🚀 Quick Start
 
-- Choose this option to play against the computer.
-- Select the difficulty level:
-  - Easy: The CPU makes random moves.
-  - Hard: The CPU makes strategic moves to try to beat you.
+```bash
+open index.html
+```
 
-### Play Against Friend
+Or just double-click `index.html` — no server, no build step.
 
-- Choose this option to play against a friend locally.
-- Take turns clicking on the cells to make your moves.
+---
 
-## Demo
+## 🎮 How to Play
 
-You can try out the game online [here](https://ayoub-lamliti.github.io/tic-tac-toe-auto-game).
+1. Choose **vs CPU** or **vs Friend**
+2. If vs CPU, pick **Easy** or **Hard**
+3. Click a cell to place your mark
+4. First to get three in a row wins
 
-Have fun playing Tic Tac Toe! If you encounter any issues or have suggestions for improvements, feel free to open an issue or create a pull request. Enjoy!
+---
+
+## 📁 Project Structure
+
+```
+index.html
+src/
+  ├── game.js       — game logic & Minimax AI
+  ├── ui.js         — DOM interactions
+  └── style.css     — layout & animations
+images/
+  └── screenshots
+README.md
+```
+
+---
+
+## 📄 License
+
+MIT — free to use, modify, and distribute.
+
+---
+
+**Author:** Ayoub Lamliti · Made for 42 School
