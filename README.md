@@ -79,11 +79,3 @@ README.md
 ```
 
 ---
-
-## 📄 License
-
-MIT — free to use, modify, and distribute.
-
----
-
-**Author:** Ayoub Lamliti · Made for 42 School
