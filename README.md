@@ -69,7 +69,8 @@ Or just double-click `index.html` — no server, no build step.
 ```
 index.html
 src/
-  ├── game.js       — game logic & Minimax AI
+  ├── ai.js         — Minimax AI & heuristic strategies
+  ├── game.js       — game logic & state management
   ├── ui.js         — DOM interactions
   └── style.css     — layout & animations
 images/
